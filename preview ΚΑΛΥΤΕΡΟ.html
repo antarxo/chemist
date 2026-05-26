@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="el">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Molecular Renderer Lab v1b — hydrogens inside cloud</title>
+<style>
+:root{--bg:#050b13;--panel:#101923;--text:#e7eef7;--muted:#9fb0c5;--line:rgba(255,255,255,.13);--accent:#65b7ff;--warn:#f7c46c}
+*{box-sizing:border-box}html,body{margin:0;height:100%;background:var(--bg);color:var(--text);font:14px/1.35 system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif}body{overflow:hidden}
+.app{display:grid;grid-template-columns:330px 1fr 330px;height:100vh;gap:10px;padding:10px}
+.panel{background:linear-gradient(180deg,rgba(255,255,255,.045),rgba(255,255,255,0)),var(--panel);border:1px solid var(--line);border-radius:18px;overflow:auto;box-shadow:0 16px 40px rgba(0,0,0,.25)}
+.left,.right{padding:12px}.stage{position:relative;overflow:hidden}#view{position:absolute;inset:0}
+h1{font-size:17px;margin:0 0 4px}.subtitle{font-size:12px;color:var(--muted);margin-bottom:12px}
+.group{border:1px solid var(--line);border-radius:14px;padding:10px;margin:0 0 10px;background:rgba(255,255,255,.035)}
+.group h2{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin:0 0 8px}
+label.toggle{display:flex;gap:8px;align-items:center;margin:8px 0;font-weight:750}input[type="checkbox"]{accent-color:var(--accent)}
+.row{display:grid;grid-template-columns:126px 1fr 54px;gap:8px;align-items:center;margin:8px 0}
+input[type="range"]{width:100%;accent-color:var(--accent)}
+select,button{width:100%;border:1px solid var(--line);border-radius:11px;padding:8px 9px;background:rgba(255,255,255,.06);color:var(--text);font-weight:800;cursor:pointer}
+button:hover,select:hover{background:rgba(101,183,255,.15)}
+.val{font-variant-numeric:tabular-nums;color:var(--muted);font-size:12px;text-align:right}.badge{display:inline-block;border:1px solid var(--line);border-radius:999px;padding:3px 8px;margin:3px 4px 3px 0;font-size:12px;font-weight:850;background:rgba(255,255,255,.045)}
+.note{font-size:12.7px;color:var(--muted);margin:8px 0}.warn{color:var(--warn)}
+#status{position:absolute;left:14px;top:12px;max-width:82%;background:rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:8px 10px;color:rgba(231,238,247,.82);font-size:12px}
+#overlay{position:absolute;left:14px;bottom:12px;right:14px;pointer-events:none;display:flex;justify-content:space-between;gap:12px;color:rgba(231,238,247,.74);font-size:12px}
+.kv{display:grid;grid-template-columns:124px 1fr;gap:6px 8px;font-size:12.6px}.kv b{color:var(--muted)}
+@media(max-width:1080px){body{overflow:auto}.app{grid-template-columns:1fr;height:auto}.stage{height:65vh;min-height:560px}}
+</style>
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.164.1/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.164.1/examples/jsm/"}}</script>
+</head>
+<body>
+<div class="app">
+<aside class="panel left">
+<h1>Molecular Renderer Lab v1b</h1>
+<div class="subtitle">παραμετρικά μόρια σε κλίμακα δοχείου · τα Η μέσα στο νέφος</div>
+
+<div class="group"><h2>Μόριο</h2><select id="mol">
+<option value="H2">H₂</option><option value="Cl2">Cl₂</option><option value="HCl">HCl</option><option value="NH3" selected>NH₃</option><option value="H2O">H₂O</option><option value="N2">N₂</option>
+</select></div>
+
+<div class="group"><h2>Κλίμακα εφαρμογής</h2>
+<div class="row"><label>Μέγεθος δοχείου</label><input id="containerScale" type="range" min="0.18" max="1.20" step="0.01" value="0.42"><span class="val" id="containerScaleVal"></span></div>
+<div class="row"><label>Η μέσα</label><input id="hInside" type="range" min="0.55" max="1.00" step="0.01" value="0.72"><span class="val" id="hInsideVal"></span></div>
+<div class="row"><label>Detail</label><input id="detail" type="range" min="12" max="52" step="2" value="22"><span class="val" id="detailVal"></span></div>
+<label class="toggle"><input id="showHints" type="checkbox" checked> Electron hints</label>
+<label class="toggle"><input id="showNuclei" type="checkbox" checked> Πυρήνες</label>
+<label class="toggle"><input id="showLabels" type="checkbox"> Labels</label>
+<label class="toggle"><input id="wire" type="checkbox"> Wireframe audit</label></div>
+
+<div class="group"><h2>Δυναμική v1</h2>
+<label class="toggle"><input id="animate" type="checkbox" checked> Ταλαντώσεις</label>
+<label class="toggle"><input id="autoRotate" type="checkbox" checked> Περιστροφή</label>
+<div class="row"><label>Stretch amp</label><input id="stretchAmp" type="range" min="0" max="0.18" step="0.005" value="0.045"><span class="val" id="stretchAmpVal"></span></div>
+<div class="row"><label>Bend amp</label><input id="bendAmp" type="range" min="0" max="0.18" step="0.005" value="0.035"><span class="val" id="bendAmpVal"></span></div>
+<div class="row"><label>Ταχύτητα</label><input id="speed" type="range" min="0.1" max="3.0" step="0.05" value="1.0"><span class="val" id="speedVal"></span></div></div>
+
+<div class="group"><h2>Νέφος</h2>
+<div class="row"><label>Base cloud</label><input id="baseCloud" type="range" min="0.55" max="1.40" step="0.01" value="0.92"><span class="val" id="baseCloudVal"></span></div>
+<div class="row"><label>Bond lobe</label><input id="bondLobe" type="range" min="0" max="0.90" step="0.01" value="0.36"><span class="val" id="bondLobeVal"></span></div>
+<div class="row"><label>Lone lobe</label><input id="loneLobe" type="range" min="0" max="1.10" step="0.01" value="0.55"><span class="val" id="loneLobeVal"></span></div>
+<div class="row"><label>Neck</label><input id="neck" type="range" min="0" max="0.80" step="0.01" value="0.42"><span class="val" id="neckVal"></span></div>
+<div class="row"><label>Polarity bias</label><input id="polarityBias" type="range" min="0" max="1" step="0.01" value="0.55"><span class="val" id="polarityBiasVal"></span></div>
+<div class="row"><label>Opacity</label><input id="opacity" type="range" min="0.12" max="0.90" step="0.01" value="0.52"><span class="val" id="opacityVal"></span></div></div>
+
+<div class="group"><h2>Προβολή</h2><button id="viewDefault">3D προβολή</button><button id="viewTop" style="margin-top:6px">Κάτοψη</button><button id="viewSide" style="margin-top:6px">Πλάγια</button><button id="reset" style="margin-top:6px">Reset</button></div>
+</aside>
+
+<main class="panel stage"><div id="view"></div><div id="status">Molecular Lab v1b — hydrogens are visually pulled inside the molecular cloud</div><div id="overlay"><span>μικρά μόρια όπως στο δοχείο</span><span>single mesh + λίγα hints · 0 particles</span></div></main>
+
+<aside class="panel right">
+<div class="group"><h2>Παραμετρικός πυρήνας</h2><span class="badge">Atoms</span><span class="badge">Bonds</span><span class="badge">Angles</span><span class="badge">Lone pairs</span><span class="badge">Cloud</span><p class="note">Κοινή μηχανή. Κάθε μόριο είναι διαφορετικό σύνολο παραμέτρων.</p></div>
+<div class="group"><h2>Τρέχον μόριο</h2><div class="kv" id="molInfo"></div></div>
+<div class="group"><h2>Κόστος</h2><div class="kv" id="perfInfo"></div><p class="note warn">Σκόπιμα χαμηλό Detail. Στο δοχείο τα μόρια είναι μικρά.</p></div>
+</aside>
+</div>
+
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+const ids=['mol','containerScale','hInside','detail','showHints','showNuclei','showLabels','wire','animate','autoRotate','stretchAmp','bendAmp','speed','baseCloud','bondLobe','loneLobe','neck','polarityBias','opacity','viewDefault','viewTop','viewSide','reset','molInfo','perfInfo'];
+const ui={};ids.forEach(id=>ui[id]=document.getElementById(id));const root=document.getElementById('view');let W=root.clientWidth,H=root.clientHeight,t=0;
+const scene=new THREE.Scene();scene.background=new THREE.Color(0x050b13);const camera=new THREE.PerspectiveCamera(42,W/H,0.1,100);camera.position.set(3.4,2.1,4.3);
+const renderer=new THREE.WebGLRenderer({antialias:true});renderer.setPixelRatio(Math.min(devicePixelRatio,2));renderer.setSize(W,H);renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.sortObjects=true;root.appendChild(renderer.domElement);
+const controls=new OrbitControls(camera,renderer.domElement);controls.enableDamping=true;controls.target.set(0,0,0);
+scene.add(new THREE.HemisphereLight(0xbfdcff,0x101828,1.08));const key=new THREE.DirectionalLight(0xffffff,1.75);key.position.set(4,5,6);scene.add(key);const fill=new THREE.DirectionalLight(0x00bfff,.55);fill.position.set(-4,2,-3);scene.add(fill);scene.add(new THREE.Mesh(new THREE.SphereGeometry(18,48,24),new THREE.MeshBasicMaterial({color:0x071120,side:THREE.BackSide})));
+let rootGroup=new THREE.Group(),cloud=null,nucleiGroup=new THREE.Group(),hintsGroup=new THREE.Group(),labelGroup=new THREE.Group();scene.add(rootGroup);rootGroup.add(nucleiGroup,hintsGroup,labelGroup);
+const V=(x,y,z)=>new THREE.Vector3(x,y,z);
+const E={H:{nucleus:.060,color:0x20c9ff},N:{nucleus:.125,color:0xf34bd5},O:{nucleus:.130,color:0xff4fc8},Cl:{nucleus:.160,color:0x7cff96}};
+function dirFromY(t,p){t=THREE.MathUtils.degToRad(t);p=THREE.MathUtils.degToRad(p);return V(Math.sin(t)*Math.cos(p),Math.cos(t),Math.sin(t)*Math.sin(p)).normalize()}
+function spec(name){if(name==='H2')return{name:'H₂',atoms:['H','H'],bonds:[[0,1,.74,1]],lps:[],geom:'linear',desc:'1 σ δεσμός'};
+if(name==='Cl2')return{name:'Cl₂',atoms:['Cl','Cl'],bonds:[[0,1,1.99,1]],lps:[[0,3],[1,3]],geom:'linear',desc:'Cl με 3 μονήρη ανά άτομο'};
+if(name==='HCl')return{name:'HCl',atoms:['H','Cl'],bonds:[[0,1,1.27,1]],lps:[[1,3]],geom:'linear polar',desc:'πολωμένος δεσμός προς Cl'};
+if(name==='H2O')return{name:'H₂O',atoms:['O','H','H'],center:0,bonds:[[0,1,.96,1],[0,2,.96,1]],lps:[[0,2]],geom:'bent',desc:'2 δεσμοί + 2 μονήρη',bondDirs:[dirFromY(127.75,0),dirFromY(127.75,180)],lpDirs:[dirFromY(54,90),dirFromY(54,270)]};
+if(name==='N2')return{name:'N₂',atoms:['N','N'],bonds:[[0,1,1.10,3]],lps:[[0,1],[1,1]],geom:'linear triple',desc:'1 σ + 2 π',triple:true};
+const gamma=107,cos2=(Math.cos(THREE.MathUtils.degToRad(gamma))+.5)/1.5,theta=180-THREE.MathUtils.radToDeg(Math.acos(Math.sqrt(Math.max(0,cos2))));
+return{name:'NH₃',atoms:['N','H','H','H'],center:0,bonds:[[0,1,1.01,1],[0,2,1.01,1],[0,3,1.01,1]],lps:[[0,1]],geom:'trigonal pyramidal',desc:'3 δεσμοί + 1 μονήρες',bondDirs:[dirFromY(theta,90),dirFromY(theta,210),dirFromY(theta,330)],lpDirs:[V(0,1,0)]}}
+function clear(g){while(g.children.length){const o=g.children.pop();o.geometry?.dispose();if(o.material){o.material.map?.dispose();o.material.dispose()}}}
+function num(id){return Number(ui[id].value)}
+function setVals(){document.querySelectorAll('input[type="range"]').forEach(e=>{const out=document.getElementById(e.id+'Val');if(out)out.textContent=Number(e.value).toFixed(e.id==='detail'?0:2)})}
+function positions(s,phase=0){const scale=num('containerScale'),stretch=ui.animate.checked?num('stretchAmp')*Math.sin(phase):0,bend=ui.animate.checked?num('bendAmp')*Math.sin(phase*.73):0;const p=s.atoms.map(()=>V(0,0,0));if(s.atoms.length===2){const L=s.bonds[0][2]*scale*(1+stretch);p[0]=V(-L/2,0,0);p[1]=V(L/2,0,0);return p}let bi=0;for(const b of s.bonds){const other=b[0]===s.center?b[1]:b[0];const dir=s.bondDirs[bi++].clone().applyAxisAngle(V(0,0,1),bend*(bi-2));p[other]=dir.multiplyScalar(b[2]*scale*(1+stretch*Math.sin(phase+bi)))}return p}
+function domains(s,p){const ds=[];if(s.atoms.length===2){const a=p[0],b=p[1];ds.push({kind:'bond',dir:b.clone().sub(a).normalize(),atomIndex:0});ds.push({kind:'bond',dir:a.clone().sub(b).normalize(),atomIndex:1});const perps=[V(0,1,0),V(0,-1,0),V(0,0,1),V(0,0,-1),V(0,.7,.7).normalize(),V(0,-.7,-.7).normalize()];for(const lp of s.lps)for(let i=0;i<lp[1];i++)ds.push({kind:'lone',dir:perps[(lp[0]*3+i)%perps.length],atomIndex:lp[0]});return ds}let bi=0;for(const b of s.bonds){const other=b[0]===s.center?b[1]:b[0];ds.push({kind:'bond',dir:p[other].clone().sub(p[s.center]).normalize(),atomIndex:s.center})}for(const d of s.lpDirs||[])ds.push({kind:'lone',dir:d.clone().normalize(),atomIndex:s.center});return ds}
+function bump(n,d,w){const c=Math.max(0,n.dot(d));return Math.exp((c-1)/Math.max(.035,w))}
+function radius(n,ds,s){let r=num('baseCloud')*.55;for(const d of ds){const c=Math.max(0,n.dot(d.dir)),b=bump(n,d.dir,.25);if(d.kind==='lone')r+=num('loneLobe')*.42*b;else r+=num('bondLobe')*.42*b-.04*Math.exp(-.5*((c-.52)/.10)**2)}for(let i=0;i<ds.length;i++)for(let j=i+1;j<ds.length;j++){const mid=ds[i].dir.clone().add(ds[j].dir);if(mid.lengthSq()<.02)continue;mid.normalize();r-=num('neck')*.22*bump(n,mid,.235)}if(s.triple)r+=.10*(Math.abs(n.y)+Math.abs(n.z));return Math.max(.08,r)*num('containerScale')*1.2}
+function color(n,ds,s){let bond=0,lone=0,heavy=0,light=0;for(const d of ds){const w=bump(n,d.dir,.26);if(d.kind==='lone')lone+=w;else bond+=w;const el=s.atoms[d.atomIndex]||s.atoms[0];if(el==='N'||el==='O'||el==='Cl')heavy+=w;else light+=w}let c=new THREE.Color(0x8b43ff);const heavyCol=new THREE.Color(s.name==='HCl'||s.name==='Cl₂'?0x6cff91:0xff10c7),hCol=new THREE.Color(0x00bfff);c.lerp(heavyCol,Math.min(1,.45+.45*num('polarityBias')*(heavy+lone)/(bond+lone+heavy+1e-6)));if(light>0)c.lerp(hCol,Math.min(.55,.32*light/(heavy+light+1e-6)));return c}
+function geom(s,p){const lat=num('detail'),lon=lat*2,ds=domains(s,p),verts=[],norm=[],cols=[],idx=[];for(let i=0;i<=lat;i++){const th=Math.PI*i/lat;for(let j=0;j<=lon;j++){const ph=2*Math.PI*j/lon,n=V(Math.sin(th)*Math.cos(ph),Math.cos(th),Math.sin(th)*Math.sin(ph)).normalize(),rr=radius(n,ds,s),cc=color(n,ds,s);verts.push(n.x*rr,n.y*rr,n.z*rr);norm.push(n.x,n.y,n.z);cols.push(cc.r,cc.g,cc.b)}}for(let i=0;i<lat;i++)for(let j=0;j<lon;j++){const a=i*(lon+1)+j,b=a+lon+1,c=b+1,d=a+1;idx.push(a,b,d,b,c,d)}const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.Float32BufferAttribute(verts,3));g.setAttribute('normal',new THREE.Float32BufferAttribute(norm,3));g.setAttribute('color',new THREE.Float32BufferAttribute(cols,3));g.setIndex(idx);g.computeVertexNormals();return g}
+function visualAtomPosition(s,p,i){
+ const el=s.atoms[i];
+ if(el!=='H') return p[i].clone();
+ // Τα Η πρέπει να φαίνονται μέσα στο ενιαίο νέφος, όχι καρφωμένα στην έξω επιφάνεια.
+ // Η φυσική θέση δεσμού παραμένει η p[i]. Εδώ διορθώνεται μόνο η θέση σχεδίασης.
+ let anchor=V(0,0,0);
+ if(s.atoms.length===2){
+   const other=i===0?1:0;
+   anchor=p[other].clone();
+ }else{
+   anchor=p[s.center??0].clone();
+ }
+ return anchor.clone().lerp(p[i], num('hInside'));
+}
+function addNuclei(s,p){
+ for(let i=0;i<s.atoms.length;i++){
+  const el=E[s.atoms[i]];
+  const m=new THREE.Mesh(
+    new THREE.SphereGeometry(el.nucleus*num('containerScale')*1.65,18,12),
+    new THREE.MeshStandardMaterial({color:el.color,roughness:.38,emissive:el.color,emissiveIntensity:.1})
+  );
+  m.position.copy(visualAtomPosition(s,p,i));
+  nucleiGroup.add(m);
+ }
+}
+function addHints(s,p){const scale=num('containerScale'),es=.020*scale/.42,geom=new THREE.SphereGeometry(es,12,8),matLP=new THREE.MeshBasicMaterial({color:0xffd6f7,transparent:true,opacity:.78}),matBP=new THREE.MeshBasicMaterial({color:0xd85cff,transparent:true,opacity:.70}),ds=domains(s,p);for(const d of ds){if(d.kind==='lone'){const base=s.atoms.length===2?p[d.atomIndex]:p[s.center];const pp=base.clone().add(d.dir.clone().multiplyScalar(scale*.42));const u=new THREE.Vector3().crossVectors(d.dir,Math.abs(d.dir.y)<.9?V(0,1,0):V(1,0,0)).normalize().multiplyScalar(es*3);for(const sg of[-1,1]){const e=new THREE.Mesh(geom,matLP);e.position.copy(pp.clone().add(u.clone().multiplyScalar(sg)));hintsGroup.add(e)}}}if(['NH₃','H₂O','HCl'].includes(s.name)){for(const b of s.bonds){const a=visualAtomPosition(s,p,b[0]),bb=visualAtomPosition(s,p,b[1]),dir=bb.clone().sub(a).normalize(),pp=a.clone().lerp(bb,.38),u=new THREE.Vector3().crossVectors(dir,Math.abs(dir.y)<.9?V(0,1,0):V(0,0,1)).normalize().multiplyScalar(es*3);for(const sg of[-1,1]){const e=new THREE.Mesh(geom,matBP);e.position.copy(pp.clone().add(u.clone().multiplyScalar(sg)));hintsGroup.add(e)}}}}
+function label(text,pos){const ca=document.createElement('canvas');ca.width=256;ca.height=96;const ctx=ca.getContext('2d');ctx.font='700 34px system-ui';ctx.textAlign='center';ctx.textBaseline='middle';ctx.lineWidth=8;ctx.strokeStyle='rgba(0,0,0,.75)';ctx.fillStyle='#e7eef7';ctx.strokeText(text,128,48);ctx.fillText(text,128,48);const tex=new THREE.CanvasTexture(ca);tex.colorSpace=THREE.SRGBColorSpace;const sp=new THREE.Sprite(new THREE.SpriteMaterial({map:tex,transparent:true}));sp.position.copy(pos);sp.scale.set(.45,.17,1);return sp}
+function rebuild(){setVals();const s=spec(ui.mol.value),p=positions(s,t);if(cloud){rootGroup.remove(cloud);cloud.geometry.dispose();cloud.material.dispose();cloud=null}clear(nucleiGroup);clear(hintsGroup);clear(labelGroup);cloud=new THREE.Mesh(geom(s,p),new THREE.MeshPhysicalMaterial({color:0xffffff,vertexColors:true,transparent:true,opacity:num('opacity'),roughness:.45,side:THREE.DoubleSide,depthWrite:false,wireframe:ui.wire.checked,emissive:0x1c0030,emissiveIntensity:.08}));rootGroup.add(cloud);if(ui.showNuclei.checked)addNuclei(s,p);if(ui.showHints.checked)addHints(s,p);if(ui.showLabels.checked)labelGroup.add(label(s.name,V(0,-.75,0)));const tris=num('detail')*num('detail')*4,lp=s.lps.map(x=>x[1]).reduce((a,b)=>a+b,0);ui.molInfo.innerHTML=`<b>μόριο</b><span>${s.name}</span><b>γεωμετρία</b><span>${s.geom}</span><b>περιγραφή</b><span>${s.desc}</span><b>άτομα</b><span>${s.atoms.join(', ')}</span><b>δεσμοί</b><span>${s.bonds.length}</span><b>μονήρη</b><span>${lp}</span>`;ui.perfInfo.innerHTML=`<b>triangles</b><span>~${tris}</span><b>particles</b><span>0</span><b>scale</b><span>${num('containerScale').toFixed(2)}</span><b>mode</b><span>container</span><b>Η μέσα</b><span>${num('hInside').toFixed(2)}</span>`}
+function setCam(m){if(m==='default')camera.position.set(3.4,2.1,4.3);if(m==='top')camera.position.set(.01,5.3,.01);if(m==='side')camera.position.set(4.8,1,.01);controls.target.set(0,0,0);controls.update()}
+window.addEventListener('resize',()=>{W=root.clientWidth;H=root.clientHeight;camera.aspect=W/H;camera.updateProjectionMatrix();renderer.setSize(W,H)});document.querySelectorAll('input,select').forEach(e=>{e.addEventListener('input',rebuild);e.addEventListener('change',rebuild)});ui.viewDefault.onclick=()=>setCam('default');ui.viewTop.onclick=()=>setCam('top');ui.viewSide.onclick=()=>setCam('side');ui.reset.onclick=()=>location.reload();
+let last=0,acc=0;function animate(ts){requestAnimationFrame(animate);const dt=Math.min(.04,(ts-last)/1000||0);last=ts;if(ui.animate.checked||ui.autoRotate.checked){t+=dt*num('speed')*4;acc+=dt;if(acc>.055){rebuild();acc=0}}if(ui.autoRotate.checked)rootGroup.rotation.y+=dt*.55;controls.update();renderer.render(scene,camera)}rebuild();animate(0);
+</script>
+</body></html>
