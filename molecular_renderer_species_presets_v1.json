@@ -1,0 +1,151 @@
+{
+  "schemaVersion": "molecular-renderer-presets-v1",
+  "project": "Μετροπόντικας της Χημείας",
+  "rules": {
+    "htmlPresetPolicy": "HTML reads presets only from this JSON. No fallback presets inside HTML.",
+    "doNotInventControls": true,
+    "appearanceModes": {
+      "container": {
+        "purpose": "small molecules inside reaction vessel",
+        "particles": 0,
+        "notes": "low-cost species models; no heavy outer layer unless explicitly set"
+      },
+      "zoom": {
+        "purpose": "future magnifier / selected molecule",
+        "notes": "may use richer satin/glow/outer layer later, not default for vessel"
+      }
+    }
+  },
+  "commonAppearancePreset": {
+    "contrast": 1.01,
+    "shellOpacity": 0.43,
+    "glow": 0.0,
+    "satinRoughness": 0.05,
+    "outerLayer": 0.0,
+    "layerScale": 1.11
+  },
+  "featureCatalog": {
+    "shape": {
+      "baseR": "base cloud radius",
+      "bpAmp": "bond-pair lobe swelling",
+      "bpRootNeck": "bond-pair root constriction",
+      "bpNeck": "outer bond-pair neck",
+      "bpBelly": "bond-pair belly",
+      "lpAmp": "lone-pair lobe swelling/diffusion",
+      "lpNeck": "lone-pair neck",
+      "width": "lobe width",
+      "neck": "inter-domain constriction",
+      "hDepth": "visual hydrogen depth inside the cloud",
+      "lpBias": "lone-pair visual position relative to central atom",
+      "detail": "mesh resolution"
+    },
+    "colorDominance": {
+      "nColor": "central/heavy atom color intensity",
+      "nDominance": "central/heavy atom spatial dominance",
+      "bondNDominance": "central/heavy atom dominance inside bond regions",
+      "hColor": "hydrogen contribution color intensity",
+      "hExtent": "hydrogen color extent",
+      "contrast": "global color contrast"
+    },
+    "surfaceAppearance": {
+      "shellOpacity": "main cloud opacity",
+      "glow": "emissive glow strength",
+      "satinRoughness": "surface roughness / satin feel",
+      "outerLayer": "secondary outer cloud layer opacity",
+      "layerScale": "secondary layer scale"
+    },
+    "electronHints": {
+      "lpDotSize": "lone-pair electron hint size",
+      "lpDotOpacity": "lone-pair electron hint opacity",
+      "bpDotSize": "bond-pair electron hint size",
+      "bpDotOpacity": "bond-pair electron hint opacity",
+      "bpBiasToN": "bond-pair visual position toward central/heavy atom"
+    }
+  },
+  "species": {
+    "NH3": {
+      "label": "NH₃",
+      "status": "locked",
+      "geometry": "trigonal_pyramidal",
+      "notes": [
+        "Locked ammonia geometry/logic.",
+        "Hydrogens inside cloud.",
+        "Same electron size logic where used.",
+        "Bond-pair hints along N-H axes and shifted toward N.",
+        "N magenta dominance in bond regions."
+      ],
+      "preset": {
+        "baseR": 1.27,
+        "bpAmp": 0.63,
+        "bpRootNeck": 0.08,
+        "bpNeck": 0.0,
+        "bpBelly": 0.0,
+        "lpAmp": 1.0,
+        "lpNeck": 0.0,
+        "width": 0.22,
+        "neck": 0.7,
+        "hDepth": 0.8,
+        "lpBias": 0.68,
+        "detail": 84,
+        "nColor": 1.0,
+        "nDominance": 0.83,
+        "bondNDominance": 0.42,
+        "hColor": 0.48,
+        "hExtent": 1.0,
+        "contrast": 1.01,
+        "shellOpacity": 0.43,
+        "glow": 0.0,
+        "satinRoughness": 0.05,
+        "outerLayer": 0.0,
+        "layerScale": 1.11,
+        "lpDotSize": 0.025,
+        "lpDotOpacity": 0.53,
+        "bpDotSize": 0.025,
+        "bpDotOpacity": 0.65,
+        "bpBiasToN": 0.3
+      }
+    },
+    "HCl": {
+      "label": "HCl",
+      "status": "under_review",
+      "geometry": "linear",
+      "notes": [
+        "Two nuclei only: H and Cl.",
+        "Three lone pairs on Cl.",
+        "One bond pair on H-Cl axis shifted toward Cl.",
+        "Cl visible nucleus.",
+        "H inside cloud but exposed."
+      ],
+      "preset": {
+        "baseR": 1.2,
+        "bpAmp": 0.55,
+        "bpRootNeck": 0.0,
+        "bpNeck": 0.01,
+        "bpBelly": 0.0,
+        "lpAmp": 0.58,
+        "lpNeck": 0.07,
+        "width": 0.18,
+        "neck": 0.7,
+        "hDepth": 0.81,
+        "lpBias": 0.68,
+        "detail": 84,
+        "nColor": 0.96,
+        "nDominance": 0.5,
+        "bondNDominance": 0.36,
+        "hColor": 0.81,
+        "hExtent": 0.99,
+        "contrast": 1.01,
+        "shellOpacity": 0.43,
+        "glow": 0.0,
+        "satinRoughness": 0.05,
+        "outerLayer": 0.0,
+        "layerScale": 1.11,
+        "lpDotSize": 0.03,
+        "lpDotOpacity": 0.43,
+        "bpDotSize": 0.03,
+        "bpDotOpacity": 0.58,
+        "bpBiasToN": 0.28
+      }
+    }
+  }
+}
