@@ -1,0 +1,771 @@
+{
+  "schemaVersion": "molecular-renderer-presets-v4-profiles-transfer-ready",
+  "project": "Μετροπόντικας της Χημείας",
+  "htmlPresetPolicy": "manual JSON only; no embedded fallback presets in HTML",
+  "commonAppearancePreset": {
+    "contrast": 1.01,
+    "opacity": 0.43,
+    "glow": 0,
+    "surfaceRoughness": 0.05,
+    "atmosphereOpacity": 0,
+    "atmosphereScale": 1.11
+  },
+  "featureCatalog": {
+    "shape": [
+      "baseR",
+      "bpAmp",
+      "bpRoot",
+      "bpNeck",
+      "bpBelly",
+      "lpAmp",
+      "lpNeck",
+      "width",
+      "neck",
+      "hDepth",
+      "lpBias",
+      "detail"
+    ],
+    "colorDominance": [
+      "nColor",
+      "nDominance",
+      "bondNDominance",
+      "hColor",
+      "hExtent",
+      "contrast"
+    ],
+    "surfaceAppearance": [
+      "opacity",
+      "glow",
+      "surfaceRoughness",
+      "atmosphereOpacity",
+      "atmosphereScale"
+    ],
+    "electronHints": [
+      "lpDotSize",
+      "lpDotOpacity",
+      "bpDotSize",
+      "bpDotOpacity",
+      "bpBias"
+    ]
+  },
+  "species": {
+    "NH3": {
+      "label": "NH₃",
+      "status": "locked",
+      "geometry": "trigonal_pyramidal",
+      "structuralModel": {
+        "atoms": [
+          {
+            "id": "N",
+            "element": "N",
+            "role": "central",
+            "massNumber": 14,
+            "nucleusRadiusRelativeA13": 2.4101
+          },
+          {
+            "id": "H1",
+            "element": "H",
+            "role": "terminal",
+            "massNumber": 1,
+            "nucleusRadiusRelativeA13": 1.0
+          },
+          {
+            "id": "H2",
+            "element": "H",
+            "role": "terminal",
+            "massNumber": 1,
+            "nucleusRadiusRelativeA13": 1.0
+          },
+          {
+            "id": "H3",
+            "element": "H",
+            "role": "terminal",
+            "massNumber": 1,
+            "nucleusRadiusRelativeA13": 1.0
+          }
+        ],
+        "bonds": [
+          {
+            "a": "N",
+            "b": "H1",
+            "type": "single",
+            "sigma": 1,
+            "pi": 0,
+            "lengthAngstrom": 1.01,
+            "lengthRatioRelativeToNH": 1.0
+          },
+          {
+            "a": "N",
+            "b": "H2",
+            "type": "single",
+            "sigma": 1,
+            "pi": 0,
+            "lengthAngstrom": 1.01,
+            "lengthRatioRelativeToNH": 1.0
+          },
+          {
+            "a": "N",
+            "b": "H3",
+            "type": "single",
+            "sigma": 1,
+            "pi": 0,
+            "lengthAngstrom": 1.01,
+            "lengthRatioRelativeToNH": 1.0
+          }
+        ],
+        "bondAnglesDeg": [
+          {
+            "atoms": [
+              "H1",
+              "N",
+              "H2"
+            ],
+            "value": 107,
+            "appliesToAllHNH": true
+          }
+        ],
+        "electronPairModel": {
+          "bondPairs": 3,
+          "lonePairsTotal": 1,
+          "lonePairs": [
+            {
+              "atom": "N",
+              "count": 1
+            }
+          ],
+          "sigmaBonds": 3,
+          "piBonds": 0
+        },
+        "geometryNotes": "trigonal pyramidal; hydrogens inside shared cloud; bond-pair hints shifted toward N"
+      },
+      "defaultRenderProfile": "zoom",
+      "renderProfiles": {
+        "zoom": {
+          "status": "locked",
+          "source": "previous_species_preset",
+          "preset": {
+            "baseR": 1.27,
+            "bpAmp": 0.63,
+            "bpRoot": 0.08,
+            "bpNeck": 0,
+            "bpBelly": 0,
+            "lpAmp": 1,
+            "lpNeck": 0,
+            "width": 0.22,
+            "neck": 0.7,
+            "hDepth": 0.8,
+            "lpBias": 0.68,
+            "detail": 84,
+            "nColor": 1,
+            "nDominance": 0.83,
+            "bondNDominance": 0.42,
+            "hColor": 0.48,
+            "hExtent": 1,
+            "lpDotSize": 0.025,
+            "lpDotOpacity": 0.53,
+            "bpDotSize": 0.025,
+            "bpDotOpacity": 0.65,
+            "bpBias": 0.3,
+            "contrast": 1.01,
+            "opacity": 0.43,
+            "glow": 0,
+            "surfaceRoughness": 0.05,
+            "atmosphereOpacity": 0,
+            "atmosphereScale": 1.11
+          }
+        },
+        "vessel": {
+          "status": "reserved_no_render_preset_yet",
+          "preset": null,
+          "notes": "Να συμπληρωθεί μόνο με ρητά ρυθμισμένες τιμές δοχείου."
+        }
+      }
+    },
+    "HCl": {
+      "label": "HCl",
+      "status": "under_review",
+      "geometry": "linear",
+      "structuralModel": {
+        "atoms": [
+          {
+            "id": "H",
+            "element": "H",
+            "role": "terminal",
+            "massNumber": 1,
+            "nucleusRadiusRelativeA13": 1.0
+          },
+          {
+            "id": "Cl",
+            "element": "Cl",
+            "role": "central",
+            "massNumber": 35,
+            "nucleusRadiusRelativeA13": 3.2711
+          }
+        ],
+        "bonds": [
+          {
+            "a": "H",
+            "b": "Cl",
+            "type": "single",
+            "sigma": 1,
+            "pi": 0,
+            "lengthAngstrom": 1.27,
+            "lengthRatioRelativeToNH": 1.2574
+          }
+        ],
+        "bondAnglesDeg": [],
+        "electronPairModel": {
+          "bondPairs": 1,
+          "lonePairsTotal": 3,
+          "lonePairs": [
+            {
+              "atom": "Cl",
+              "count": 3
+            }
+          ],
+          "sigmaBonds": 1,
+          "piBonds": 0
+        },
+        "geometryNotes": "linear diatomic; one bond pair on H-Cl axis shifted toward Cl; three lone pairs on Cl"
+      },
+      "defaultRenderProfile": "zoom",
+      "renderProfiles": {
+        "zoom": {
+          "status": "tuned_or_under_review",
+          "source": "previous_species_preset",
+          "preset": {
+            "baseR": 1.2,
+            "bpAmp": 0.55,
+            "bpRoot": 0,
+            "bpNeck": 0.01,
+            "bpBelly": 0,
+            "lpAmp": 0.58,
+            "lpNeck": 0.07,
+            "width": 0.18,
+            "neck": 0.7,
+            "hDepth": 0.81,
+            "lpBias": 0.68,
+            "detail": 84,
+            "nColor": 0.96,
+            "nDominance": 0.5,
+            "bondNDominance": 0.36,
+            "hColor": 0.81,
+            "hExtent": 0.99,
+            "lpDotSize": 0.03,
+            "lpDotOpacity": 0.43,
+            "bpDotSize": 0.03,
+            "bpDotOpacity": 0.58,
+            "bpBias": 0.28,
+            "contrast": 1.01,
+            "opacity": 0.43,
+            "glow": 0,
+            "surfaceRoughness": 0.05,
+            "atmosphereOpacity": 0,
+            "atmosphereScale": 1.11
+          }
+        },
+        "vessel": {
+          "status": "reserved_no_render_preset_yet",
+          "preset": null,
+          "notes": "Να συμπληρωθεί μόνο με ρητά ρυθμισμένες τιμές δοχείου."
+        }
+      }
+    },
+    "H2O": {
+      "label": "H₂O",
+      "status": "draft_from_NH3_HCl_analogies",
+      "geometry": "bent",
+      "structuralModel": {
+        "atoms": [
+          {
+            "id": "O",
+            "element": "O",
+            "role": "central",
+            "massNumber": 16,
+            "nucleusRadiusRelativeA13": 2.5198
+          },
+          {
+            "id": "H1",
+            "element": "H",
+            "role": "terminal",
+            "massNumber": 1,
+            "nucleusRadiusRelativeA13": 1.0
+          },
+          {
+            "id": "H2",
+            "element": "H",
+            "role": "terminal",
+            "massNumber": 1,
+            "nucleusRadiusRelativeA13": 1.0
+          }
+        ],
+        "bonds": [
+          {
+            "a": "O",
+            "b": "H1",
+            "type": "single",
+            "sigma": 1,
+            "pi": 0,
+            "lengthAngstrom": 0.96,
+            "lengthRatioRelativeToNH": 0.9505
+          },
+          {
+            "a": "O",
+            "b": "H2",
+            "type": "single",
+            "sigma": 1,
+            "pi": 0,
+            "lengthAngstrom": 0.96,
+            "lengthRatioRelativeToNH": 0.9505
+          }
+        ],
+        "bondAnglesDeg": [
+          {
+            "atoms": [
+              "H1",
+              "O",
+              "H2"
+            ],
+            "value": 104.5
+          }
+        ],
+        "electronPairModel": {
+          "bondPairs": 2,
+          "lonePairsTotal": 2,
+          "lonePairs": [
+            {
+              "atom": "O",
+              "count": 2
+            }
+          ],
+          "sigmaBonds": 2,
+          "piBonds": 0
+        },
+        "geometryNotes": "bent molecule; oxygen-dominant cloud; two lone-pair domains on O; hydrogens inside shared cloud"
+      },
+      "lastUpdatedFromHTML": "2026-05-27T00:28:53.904Z",
+      "defaultRenderProfile": "zoom",
+      "renderProfiles": {
+        "zoom": {
+          "status": "tuned_or_under_review",
+          "source": "previous_species_preset",
+          "preset": {
+            "baseR": 1.2,
+            "bpAmp": 0.55,
+            "bpRoot": 0.06,
+            "bpNeck": 0.01,
+            "bpBelly": 0,
+            "lpAmp": 0.92,
+            "lpNeck": 0.04,
+            "width": 0.22,
+            "neck": 0.7,
+            "hDepth": 0.78,
+            "lpBias": 0.74,
+            "detail": 84,
+            "nColor": 1,
+            "nDominance": 0.88,
+            "bondNDominance": 0.5,
+            "hColor": 0.98,
+            "hExtent": 1,
+            "contrast": 1.01,
+            "opacity": 0.43,
+            "glow": 0,
+            "surfaceRoughness": 0.05,
+            "atmosphereOpacity": 0,
+            "atmosphereScale": 1.11,
+            "lpDotSize": 0.025,
+            "lpDotOpacity": 0.53,
+            "bpDotSize": 0.025,
+            "bpDotOpacity": 0.65,
+            "bpBias": 0.3
+          }
+        },
+        "vessel": {
+          "status": "reserved_no_render_preset_yet",
+          "preset": null,
+          "notes": "Να συμπληρωθεί μόνο με ρητά ρυθμισμένες τιμές δοχείου."
+        }
+      }
+    },
+    "H2": {
+      "label": "H₂",
+      "status": "draft_render_profile_for_tuning",
+      "geometry": "linear",
+      "structuralModel": {
+        "atoms": [
+          {
+            "id": "H1",
+            "element": "H",
+            "role": "terminal",
+            "massNumber": 1,
+            "nucleusRadiusRelativeA13": 1.0
+          },
+          {
+            "id": "H2",
+            "element": "H",
+            "role": "terminal",
+            "massNumber": 1,
+            "nucleusRadiusRelativeA13": 1.0
+          }
+        ],
+        "bonds": [
+          {
+            "a": "H1",
+            "b": "H2",
+            "type": "single",
+            "sigma": 1,
+            "pi": 0,
+            "lengthAngstrom": 0.74,
+            "lengthRatioRelativeToNH": 0.7327
+          }
+        ],
+        "bondAnglesDeg": [],
+        "electronPairModel": {
+          "bondPairs": 1,
+          "lonePairsTotal": 0,
+          "lonePairs": [],
+          "sigmaBonds": 1,
+          "piBonds": 0
+        },
+        "geometryNotes": "linear homonuclear diatomic; one sigma bond; no lone pairs"
+      },
+      "defaultRenderProfile": "zoom",
+      "renderProfiles": {
+        "zoom": {
+          "status": "draft_for_tuning",
+          "source": "H2 first render draft; structuralModel physical ratios already locked",
+          "preset": {
+            "baseR": 0.58,
+            "bpAmp": 0.34,
+            "bpRoot": 0.0,
+            "bpNeck": 0.0,
+            "bpBelly": 0.0,
+            "lpAmp": 0.0,
+            "lpNeck": 0.0,
+            "width": 0.22,
+            "neck": 0.7,
+            "hDepth": 0.72,
+            "lpBias": 0.68,
+            "detail": 84,
+            "nColor": 0.0,
+            "nDominance": 0.0,
+            "bondNDominance": 0.0,
+            "hColor": 1.0,
+            "hExtent": 1.0,
+            "lpDotSize": 0.0,
+            "lpDotOpacity": 0.0,
+            "bpDotSize": 0.025,
+            "bpDotOpacity": 0.6,
+            "bpBias": 0.0,
+            "contrast": 1.01,
+            "opacity": 0.43,
+            "glow": 0.0,
+            "surfaceRoughness": 0.05,
+            "atmosphereOpacity": 0.0,
+            "atmosphereScale": 1.11
+          }
+        },
+        "vessel": {
+          "status": "reserved_no_render_preset_yet",
+          "preset": null,
+          "notes": "Να συμπληρωθεί μόνο με ρητά ρυθμισμένες τιμές δοχείου."
+        }
+      }
+    },
+    "Cl2": {
+      "label": "Cl₂",
+      "status": "draft_render_profile_for_tuning",
+      "geometry": "linear",
+      "structuralModel": {
+        "atoms": [
+          {
+            "id": "Cl1",
+            "element": "Cl",
+            "role": "terminal",
+            "massNumber": 35,
+            "nucleusRadiusRelativeA13": 3.2711
+          },
+          {
+            "id": "Cl2",
+            "element": "Cl",
+            "role": "terminal",
+            "massNumber": 35,
+            "nucleusRadiusRelativeA13": 3.2711
+          }
+        ],
+        "bonds": [
+          {
+            "a": "Cl1",
+            "b": "Cl2",
+            "type": "single",
+            "sigma": 1,
+            "pi": 0,
+            "lengthAngstrom": 1.99,
+            "lengthRatioRelativeToNH": 1.9703
+          }
+        ],
+        "bondAnglesDeg": [],
+        "electronPairModel": {
+          "bondPairs": 1,
+          "lonePairsTotal": 6,
+          "lonePairs": [
+            {
+              "atom": "Cl1",
+              "count": 3
+            },
+            {
+              "atom": "Cl2",
+              "count": 3
+            }
+          ],
+          "sigmaBonds": 1,
+          "piBonds": 0
+        },
+        "geometryNotes": "linear homonuclear diatomic; each Cl contributes one bonding electron/lobe toward the other Cl; three lone pairs remain as terminal local lobes on each Cl."
+      },
+      "defaultRenderProfile": "zoom",
+      "renderProfiles": {
+        "zoom": {
+          "status": "draft_for_tuning_cl2_local_lobes_fixed2",
+          "source": "Cl2 first render draft; structuralModel physical ratios already locked",
+          "preset": {
+            "baseR": 1.2,
+            "bpAmp": 0.49,
+            "bpRoot": 0.04,
+            "bpNeck": 0.04,
+            "bpBelly": 0.01,
+            "lpAmp": 0.58,
+            "lpNeck": 0.0,
+            "width": 0.18,
+            "neck": 0.7,
+            "hDepth": 0.81,
+            "lpBias": 0.7,
+            "detail": 84,
+            "nColor": 0.96,
+            "nDominance": 0.5,
+            "bondNDominance": 0.36,
+            "hColor": 0.81,
+            "hExtent": 0.99,
+            "lpDotSize": 0.03,
+            "lpDotOpacity": 0.43,
+            "bpDotSize": 0.03,
+            "bpDotOpacity": 0.58,
+            "bpBias": 0.28,
+            "contrast": 1.01,
+            "opacity": 0.43,
+            "glow": 0.0,
+            "surfaceRoughness": 0.05,
+            "atmosphereOpacity": 0.0,
+            "atmosphereScale": 1.11
+          },
+          "notes": "Fixed: Cl2 cloud is a real THREE.Group, old diatomic guard removed, LP/BP hints remain visible. Two local Cl environments: each has three lone-pair lobes and one inward bonding lobe."
+        },
+        "vessel": {
+          "status": "reserved_no_render_preset_yet",
+          "preset": null,
+          "notes": "Να συμπληρωθεί μόνο με ρητά ρυθμισμένες τιμές δοχείου."
+        }
+      }
+    },
+    "N2": {
+      "label": "N₂",
+      "status": "draft_render_profile_for_tuning",
+      "geometry": "linear_triple_bond",
+      "structuralModel": {
+        "atoms": [
+          {
+            "id": "N1",
+            "element": "N",
+            "role": "terminal",
+            "massNumber": 14,
+            "nucleusRadiusRelativeA13": 2.4101
+          },
+          {
+            "id": "N2",
+            "element": "N",
+            "role": "terminal",
+            "massNumber": 14,
+            "nucleusRadiusRelativeA13": 2.4101
+          }
+        ],
+        "bonds": [
+          {
+            "a": "N1",
+            "b": "N2",
+            "type": "triple",
+            "sigma": 1,
+            "pi": 2,
+            "lengthAngstrom": 1.1,
+            "lengthRatioRelativeToNH": 1.0891
+          }
+        ],
+        "bondAnglesDeg": [],
+        "electronPairModel": {
+          "bondPairs": 3,
+          "lonePairsTotal": 2,
+          "lonePairs": [
+            {
+              "atom": "N1",
+              "count": 1
+            },
+            {
+              "atom": "N2",
+              "count": 1
+            }
+          ],
+          "sigmaBonds": 1,
+          "piBonds": 2
+        },
+        "geometryNotes": "N2 shown as two ammonia-like nitrogen centers without H atoms; the three former N-H directions are paired and joined as three common bonding legs; one lone pair remains outside each N."
+      },
+      "defaultRenderProfile": "zoom",
+      "renderProfiles": {
+        "zoom": {
+          "status": "draft_for_tuning_n2_two_ammonias_joined",
+          "source": "N2 first render draft; structuralModel physical ratios already locked",
+          "preset": {
+            "baseR": 0.92,
+            "bpAmp": 0.54,
+            "bpRoot": 0.02,
+            "bpNeck": 0.02,
+            "bpBelly": 0.0,
+            "lpAmp": 0.42,
+            "lpNeck": 0.02,
+            "width": 0.18,
+            "neck": 0.7,
+            "hDepth": 0.72,
+            "lpBias": 0.68,
+            "detail": 84,
+            "nColor": 1.0,
+            "nDominance": 0.76,
+            "bondNDominance": 0.5,
+            "hColor": 0.0,
+            "hExtent": 1.0,
+            "lpDotSize": 0.025,
+            "lpDotOpacity": 0.53,
+            "bpDotSize": 0.025,
+            "bpDotOpacity": 0.65,
+            "bpBias": 0.0,
+            "contrast": 1.01,
+            "opacity": 0.43,
+            "glow": 0.0,
+            "surfaceRoughness": 0.05,
+            "atmosphereOpacity": 0.0,
+            "atmosphereScale": 1.11
+          },
+          "notes": "N2 renderer rebuilt literally as two NH3-like nitrogen environments with hydrogens removed. The three NH3 bond positions of one nitrogen are joined to the three corresponding bond positions of the other nitrogen. Each joined leg carries one electron pair; each nitrogen keeps one external lone pair."
+        },
+        "vessel": {
+          "status": "reserved_no_render_preset_yet",
+          "preset": null,
+          "notes": "Να συμπληρωθεί μόνο με ρητά ρυθμισμένες τιμές δοχείου."
+        }
+      }
+    }
+  },
+  "physicalScaleReference": {
+    "policy": "Physical/structural ratios are locked here. Visual rendering may use a global scale, but relative nuclear sizes and relative bond lengths must follow these values unless explicitly changed.",
+    "bondLengthUnit": "angstrom",
+    "bondLengthsUsed": {
+      "H-H": 0.74,
+      "N-H": 1.01,
+      "O-H": 0.96,
+      "H-Cl": 1.27,
+      "Cl-Cl": 1.99,
+      "N≡N": 1.1
+    },
+    "bondLengthRatiosRelativeToNH": {
+      "H-H": 0.7327,
+      "N-H": 1.0,
+      "O-H": 0.9505,
+      "H-Cl": 1.2574,
+      "Cl-Cl": 1.9703,
+      "N≡N": 1.0891
+    },
+    "nuclearRadiusRule": "relative visual nucleus radius follows A^(1/3), then may be globally scaled for visibility",
+    "nuclearRadiusRelativeA13": {
+      "H-1": 1.0,
+      "N-14": 2.4101,
+      "O-16": 2.5198,
+      "Cl-35": 3.2711
+    },
+    "currentElements": {
+      "H": {
+        "massNumberUsed": 1,
+        "nucleusRadiusRelativeA13": 1.0
+      },
+      "N": {
+        "massNumberUsed": 14,
+        "nucleusRadiusRelativeA13": 2.4101
+      },
+      "O": {
+        "massNumberUsed": 16,
+        "nucleusRadiusRelativeA13": 2.5198
+      },
+      "Cl": {
+        "massNumberUsed": 35,
+        "nucleusRadiusRelativeA13": 3.2711
+      }
+    },
+    "futureSpeciesRule": "Every new species must first define structuralModel with atoms, bonds, bond lengths, geometry, bond angles where relevant, sigma/pi counts, and lone-pair counts. Rendering presets are separate."
+  },
+  "runtimePolicy": {
+    "singleSourceOfTruth": "Presets.json",
+    "noHtmlFallbackPresets": true,
+    "doNotInventProfileValues": true,
+    "profileResolutionRule": "Use only renderProfiles[profileKey].preset when status is tuned/locked. Reserved slots with null preset must not be silently replaced by another profile.",
+    "mainAppTransferGoal": "Main application should consume structuralModel for physics/geometry and renderProfiles for visual presets. Renderer code must not hardcode molecule-specific appearance values."
+  },
+  "renderProfileCatalog": {
+    "zoom": {
+      "purpose": "ακριβή/zoom έκδοση για μεγεθυντικό φακό ή επιλεγμένο μόριο",
+      "status": "active_for_species_with_existing_preset",
+      "notes": "Χρησιμοποιεί τις ήδη δοσμένες/ρυθμισμένες τιμές. Δεν είναι default δοχείου."
+    },
+    "vessel": {
+      "purpose": "ευέλικτη έκδοση δοχείου αντίδρασης, με μικρό μέγεθος και χαμηλό κόστος",
+      "status": "reserved_slot_not_tuned_yet",
+      "notes": "Άνοιγμα θέσης για κάθε μόριο. Δεν γεμίζει με αυθαίρετες τιμές. Θα ρυθμιστεί χωριστά όταν περάσουμε σε σμικρύνσεις/βελτιστοποίηση δοχείου."
+    }
+  },
+  "moduleContract": {
+    "speciesRequiredFields": [
+      "label",
+      "status",
+      "geometry",
+      "structuralModel",
+      "renderProfiles"
+    ],
+    "structuralModelRequiredFields": [
+      "atoms",
+      "bonds",
+      "electronPairModel"
+    ],
+    "renderProfileRequiredFieldsWhenTuned": [
+      "status",
+      "preset"
+    ],
+    "recommendedRuntimeObjects": {
+      "MoleculeSpecies": [
+        "key",
+        "label",
+        "structuralModel",
+        "renderPreset"
+      ],
+      "MoleculeInstance": [
+        "speciesKey",
+        "profileKey",
+        "position",
+        "orientation",
+        "velocity",
+        "angularVelocity",
+        "vibrationState"
+      ],
+      "VibrationState": [
+        "bondStretch",
+        "angleBend",
+        "cloudDeformation"
+      ]
+    }
+  }
+}
