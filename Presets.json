@@ -67,21 +67,21 @@
             "element": "H",
             "role": "terminal",
             "massNumber": 1,
-            "nucleusRadiusRelativeA13": 1.0
+            "nucleusRadiusRelativeA13": 1
           },
           {
             "id": "H2",
             "element": "H",
             "role": "terminal",
             "massNumber": 1,
-            "nucleusRadiusRelativeA13": 1.0
+            "nucleusRadiusRelativeA13": 1
           },
           {
             "id": "H3",
             "element": "H",
             "role": "terminal",
             "massNumber": 1,
-            "nucleusRadiusRelativeA13": 1.0
+            "nucleusRadiusRelativeA13": 1
           }
         ],
         "bonds": [
@@ -92,7 +92,7 @@
             "sigma": 1,
             "pi": 0,
             "lengthAngstrom": 1.01,
-            "lengthRatioRelativeToNH": 1.0
+            "lengthRatioRelativeToNH": 1
           },
           {
             "a": "N",
@@ -101,7 +101,7 @@
             "sigma": 1,
             "pi": 0,
             "lengthAngstrom": 1.01,
-            "lengthRatioRelativeToNH": 1.0
+            "lengthRatioRelativeToNH": 1
           },
           {
             "a": "N",
@@ -110,7 +110,7 @@
             "sigma": 1,
             "pi": 0,
             "lengthAngstrom": 1.01,
-            "lengthRatioRelativeToNH": 1.0
+            "lengthRatioRelativeToNH": 1
           }
         ],
         "bondAnglesDeg": [
@@ -192,7 +192,7 @@
             "element": "H",
             "role": "terminal",
             "massNumber": 1,
-            "nucleusRadiusRelativeA13": 1.0
+            "nucleusRadiusRelativeA13": 1
           },
           {
             "id": "Cl",
@@ -289,14 +289,14 @@
             "element": "H",
             "role": "terminal",
             "massNumber": 1,
-            "nucleusRadiusRelativeA13": 1.0
+            "nucleusRadiusRelativeA13": 1
           },
           {
             "id": "H2",
             "element": "H",
             "role": "terminal",
             "massNumber": 1,
-            "nucleusRadiusRelativeA13": 1.0
+            "nucleusRadiusRelativeA13": 1
           }
         ],
         "bonds": [
@@ -398,14 +398,14 @@
             "element": "H",
             "role": "terminal",
             "massNumber": 1,
-            "nucleusRadiusRelativeA13": 1.0
+            "nucleusRadiusRelativeA13": 1
           },
           {
             "id": "H2",
             "element": "H",
             "role": "terminal",
             "massNumber": 1,
-            "nucleusRadiusRelativeA13": 1.0
+            "nucleusRadiusRelativeA13": 1
           }
         ],
         "bonds": [
@@ -437,31 +437,31 @@
           "preset": {
             "baseR": 0.58,
             "bpAmp": 0.34,
-            "bpRoot": 0.0,
-            "bpNeck": 0.0,
-            "bpBelly": 0.0,
-            "lpAmp": 0.0,
-            "lpNeck": 0.0,
+            "bpRoot": 0,
+            "bpNeck": 0,
+            "bpBelly": 0,
+            "lpAmp": 0,
+            "lpNeck": 0,
             "width": 0.22,
             "neck": 0.7,
             "hDepth": 0.72,
             "lpBias": 0.68,
             "detail": 84,
-            "nColor": 0.0,
-            "nDominance": 0.0,
-            "bondNDominance": 0.0,
-            "hColor": 1.0,
-            "hExtent": 1.0,
-            "lpDotSize": 0.0,
-            "lpDotOpacity": 0.0,
+            "nColor": 0,
+            "nDominance": 0,
+            "bondNDominance": 0,
+            "hColor": 1,
+            "hExtent": 1,
+            "lpDotSize": 0,
+            "lpDotOpacity": 0,
             "bpDotSize": 0.025,
             "bpDotOpacity": 0.6,
-            "bpBias": 0.0,
+            "bpBias": 0,
             "contrast": 1.01,
             "opacity": 0.43,
-            "glow": 0.0,
+            "glow": 0,
             "surfaceRoughness": 0.05,
-            "atmosphereOpacity": 0.0,
+            "atmosphereOpacity": 0,
             "atmosphereScale": 1.11
           }
         },
@@ -533,32 +533,33 @@
             "bpAmp": 0.49,
             "bpRoot": 0.04,
             "bpNeck": 0.04,
-            "bpBelly": 0.01,
+            "bpBelly": 0.1,
             "lpAmp": 0.58,
-            "lpNeck": 0.0,
-            "width": 0.18,
+            "lpNeck": 0.01,
+            "width": 0.25,
             "neck": 0.7,
-            "hDepth": 0.81,
-            "lpBias": 0.7,
+            "hDepth": 1,
+            "lpBias": 0.9,
             "detail": 84,
             "nColor": 0.96,
             "nDominance": 0.5,
             "bondNDominance": 0.36,
             "hColor": 0.81,
             "hExtent": 0.99,
-            "lpDotSize": 0.03,
-            "lpDotOpacity": 0.43,
-            "bpDotSize": 0.03,
-            "bpDotOpacity": 0.58,
-            "bpBias": 0.28,
-            "contrast": 1.01,
-            "opacity": 0.43,
-            "glow": 0.0,
+            "contrast": 1.71,
+            "opacity": 0.45,
+            "glow": 0,
             "surfaceRoughness": 0.05,
-            "atmosphereOpacity": 0.0,
-            "atmosphereScale": 1.11
+            "atmosphereOpacity": 0,
+            "atmosphereScale": 1.17,
+            "lpDotSize": 0.015,
+            "lpDotOpacity": 0.71,
+            "bpDotSize": 0.015,
+            "bpDotOpacity": 0.71,
+            "bpBias": 0.28
           },
-          "notes": "Fixed: Cl2 cloud is a real THREE.Group, old diatomic guard removed, LP/BP hints remain visible. Two local Cl environments: each has three lone-pair lobes and one inward bonding lobe."
+          "notes": "Fixed: Cl2 cloud is a real THREE.Group, old diatomic guard removed, LP/BP hints remain visible. Two local Cl environments: each has three lone-pair lobes and one inward bonding lobe.",
+          "lastUpdatedFromHTML": "2026-05-27T05:12:32.583Z"
         },
         "vessel": {
           "status": "reserved_no_render_preset_yet",
@@ -628,7 +629,7 @@
             "bpAmp": 0.54,
             "bpRoot": 0.02,
             "bpNeck": 0.02,
-            "bpBelly": 0.0,
+            "bpBelly": 0,
             "lpAmp": 0.42,
             "lpNeck": 0.02,
             "width": 0.18,
@@ -636,21 +637,21 @@
             "hDepth": 0.72,
             "lpBias": 0.68,
             "detail": 84,
-            "nColor": 1.0,
+            "nColor": 1,
             "nDominance": 0.76,
             "bondNDominance": 0.5,
-            "hColor": 0.0,
-            "hExtent": 1.0,
+            "hColor": 0,
+            "hExtent": 1,
             "lpDotSize": 0.025,
             "lpDotOpacity": 0.53,
             "bpDotSize": 0.025,
             "bpDotOpacity": 0.65,
-            "bpBias": 0.0,
+            "bpBias": 0,
             "contrast": 1.01,
             "opacity": 0.43,
-            "glow": 0.0,
+            "glow": 0,
             "surfaceRoughness": 0.05,
-            "atmosphereOpacity": 0.0,
+            "atmosphereOpacity": 0,
             "atmosphereScale": 1.11
           },
           "notes": "N2 renderer rebuilt literally as two NH3-like nitrogen environments with hydrogens removed. The three NH3 bond positions of one nitrogen are joined to the three corresponding bond positions of the other nitrogen. Each joined leg carries one electron pair; each nitrogen keeps one external lone pair."
@@ -676,7 +677,7 @@
     },
     "bondLengthRatiosRelativeToNH": {
       "H-H": 0.7327,
-      "N-H": 1.0,
+      "N-H": 1,
       "O-H": 0.9505,
       "H-Cl": 1.2574,
       "Cl-Cl": 1.9703,
@@ -684,7 +685,7 @@
     },
     "nuclearRadiusRule": "relative visual nucleus radius follows A^(1/3), then may be globally scaled for visibility",
     "nuclearRadiusRelativeA13": {
-      "H-1": 1.0,
+      "H-1": 1,
       "N-14": 2.4101,
       "O-16": 2.5198,
       "Cl-35": 3.2711
@@ -692,7 +693,7 @@
     "currentElements": {
       "H": {
         "massNumberUsed": 1,
-        "nucleusRadiusRelativeA13": 1.0
+        "nucleusRadiusRelativeA13": 1
       },
       "N": {
         "massNumberUsed": 14,
